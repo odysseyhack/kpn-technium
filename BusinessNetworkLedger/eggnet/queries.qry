@@ -1,0 +1,35 @@
+/**
+ * All named queries in this file
+ **/
+
+// Returns Fridge detail 
+ query FridgeByParticipantId {
+   description: "Returns participant detail"
+   statement:  
+      SELECT  org.smartfoodnetwork.scm.Fridge
+        WHERE (participantId == _$participantId)
+ }
+
+ // Returns Seller detail 
+ query SellerByParticipantId {
+   description: "Returns participant detail"
+   statement:  
+      SELECT  org.smartfoodnetwork.scm.Seller
+        WHERE (participantId == _$participantId)
+ }
+
+ // Returns Farmer detail 
+ query FarmerByParticipantId {
+   description: "Returns participant detail"
+   statement:  
+      SELECT  org.smartfoodnetwork.scm.Farmer
+        WHERE (participantId == _$participantId)
+ }
+
+// Returns Trigger by triggerId 
+ query TriggerByTriggerId {
+   description: "Returns triggers"
+   statement:  
+      SELECT  org.smartfoodnetwork.scm.Trigger
+        WHERE (triggerId == _$triggerId)
+ }
