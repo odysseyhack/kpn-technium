@@ -1,5 +1,7 @@
-# import dictionary for graph 
+# imports
 from collections import defaultdict 
+import requests
+import json
 
 # function for adding edge to graph 
 graph = defaultdict(list) 
@@ -33,6 +35,13 @@ def compromised_nodes(graphs, node, tab):
            
 
 
+class FridgeOwnerClass:
+    def __init__(self, name, phoneNumber):
+        self.name = name
+        self.phoneNumber = phoneNumber
+
+
+
 # Send SMS to fridge owners
 def sms_leaf_nodes(graphs, fridgeOwners, node): 
     for source, destination in graphs:
@@ -41,6 +50,18 @@ def sms_leaf_nodes(graphs, fridgeOwners, node):
                 for owner in FridgeOwners:
                     if(owner.name is destination[0]):
                         print('SMS Alert to ' + owner.phoneNumber + ' : Product ' + destination[1] + ' is part of a contaminated supply chain')
+                        # #FridgeOwners = []
+                        
+                        # # TODO 
+                        
+                        
+                        # data = {}
+                        # data['phoneNumber'] = owner.phoneNumber
+                        # data['product'] = destination[1]
+                        # json_data = json.dumps(data)
+                        # print(json_data)
+
+
             sms_leaf_nodes(graphs, fridgeOwners, destination)
 
 
@@ -59,7 +80,7 @@ class FridgeOwnerClass:
         self.name = name
         self.phoneNumber = phoneNumber
 
-
+# http://smartfood.network:3000/api/queries/FarmerByParticipantId?participantId=a
 FridgeOwners = []
 FridgeOwners.append(FridgeOwnerClass('g','0646092115'))
 FridgeOwners.append(FridgeOwnerClass('h','0646092116'))
@@ -77,7 +98,7 @@ FridgeOwners.append(FridgeOwnerClass('l','0646092120'))
 #
 ##
 
-useMockTransactions = False
+useMockTransactions = True
 
 
 if(useMockTransactions):
@@ -115,8 +136,6 @@ if(useMockTransactions):
 else:
 
     # Get transactions from the blockchain
-    import requests
-    import json
     link = "http://smartfood.network:3000/api/system/historian"
     f = requests.get(link)
     HistorianRecords = json.loads(f.text)
@@ -126,8 +145,6 @@ else:
         if(len(HistorianRecord["eventsEmitted"]) != 0):
             d = HistorianRecord["eventsEmitted"][0]
             addEdge(graph,d['sender'],(d['receiver'], d['productCode'], d['receiverType'])) 
-
-            
             print('sender: ' + d['sender'])   
             print('receiver: ' +d['receiver'])
             print('productCode: ' +d['productCode'])
@@ -136,9 +153,11 @@ else:
 
 
 
-
-
-
+##
+#
+#   Debug information
+#
+##
 
 
 # to print generated graph 
@@ -154,23 +173,10 @@ print(' ')
 
 # send SMS to all the fridges
 print('Send warning to fridge owners')
+result = []
 sms_leaf_nodes(graphs, FridgeOwners, 'a')
 print(' ')
 
 
-# # Get transactions from the blockchain
-# import requests
-# import json
-# link = "http://smartfood.network:3000/api/system/historian"
-# f = requests.get(link)
-# HistorianRecords = json.loads(f.text)
-
-# i = 0
-# for HistorianRecord in HistorianRecords:
-#     if(len(HistorianRecord["eventsEmitted"]) != 0):
-#         d = HistorianRecord["eventsEmitted"][0]
-#         print('sender: ' + d['sender'])   
-#         print('receiver: ' +d['receiver'])
-#         print('productCode: ' +d['productCode'])
-#         print('receiverType: ' +d['receiverType'])
+print(json.dumps(result))
 
