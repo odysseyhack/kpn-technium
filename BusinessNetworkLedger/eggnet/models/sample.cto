@@ -86,7 +86,6 @@ asset Alert identified by alertId{
   o String alertId
   o String triggerId
   o String productCode 
- // o String phoneNumber //send alert using SMS
   o String alertDetails
   o String severity
   o String assesedBy //participantId
@@ -121,10 +120,6 @@ transaction UpdateTrigger{
 //logic to be written
 event UpdateTriggerEvent {
   o String triggerId
-  o String productCode
-  o String recordedBy
-  o String severity default="none"
-  o String status default="TO-ACCESS" //enum: {"TO-ACCESS","PROCESSED","IN_PROGRESS"}
 }
 
 //logic to be written
@@ -138,8 +133,4 @@ transaction UpdateAlert{
 //logic to be written
 event UpdateAlertEvent {
   o String triggerId
-  o String productCode
-  o String recordedBy
-  o String severity default="none"
-  o String status default="TO-ACCESS" //enum: {"TO-ACCESS","PROCESSED","IN_PROGRESS"}
 }
