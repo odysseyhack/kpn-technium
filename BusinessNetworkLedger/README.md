@@ -5,7 +5,7 @@ Three major components described in this folder (developed using Hyperledger Com
 1) **Models**:
 The model file(.cto) contains the definitions of each class of asset, transaction, participant, and event. It implicitly extends the Hyperledger Composer System Model described in the modelling language documentation.
 
-2) **Libraries**:
+2) **Lib**:
 The transaction processor function file(.js) contains the JavaScript logic to execute the transactions defined in the model file(.cto)
 
 3) **Permissions**:
