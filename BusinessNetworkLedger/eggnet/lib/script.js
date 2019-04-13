@@ -147,6 +147,7 @@ function CreateAlert(alertData){
         // 3 Emit the event
         var event = factory.newEvent(NS, 'CreateAlertEvent');
         event.alertId = alertData.alertId;
+        event.productCode = alertData.productCode;
 
         
         emit(event);
@@ -202,6 +203,7 @@ function UpdateAlert(alertData){
         // 3 Emit the event
         var event = factory.newEvent(NS, 'UpdateAlertEvent');
         event.alertId = alertData.alertId;
+        event.productCode = alertData.productCode;
 
         
         emit(event);
@@ -253,6 +255,7 @@ function CreateTrigger(triggerData){
         // 3 Emit the event
         var event = factory.newEvent(NS, 'CreateTriggerEvent');
         event.triggerId = triggerData.triggerId;
+        event.productCode = triggerData.productCode;
 
         
         emit(event);
@@ -303,6 +306,7 @@ function UpdateTrigger(triggerData){
         // 3 Emit the event
         var event = factory.newEvent(NS, 'UpdateTriggerEvent');
         event.triggerId = triggerData.triggerId;
+        event.productCode = triggerData.productCode;
 
         
         emit(event);
@@ -346,6 +350,7 @@ function CreateAlertSent(alertSentData){
         var  alertSentId = alertSentData.alertSentId;
         var  assetObj = factory.newResource(NS,'AlertSent',alertSentId);
         assetObj.alertSentId = alertSentData.alertSentId;
+        assetObj.productCode = alertSentData.productCode;
         assetObj.alertId = alertSentData.alertId;
         assetObj.deviceAddressId = alertSentData.deviceAddressId;
         assetObj.deviceAddressType = alertSentData.deviceAddressType;
@@ -354,7 +359,7 @@ function CreateAlertSent(alertSentData){
         // 3 Emit the event
         var event = factory.newEvent(NS, 'CreateAlertSentEvent');
         event.alertSentId = alertSentData.alertSentId;
-
+        event.productCode = alertSentData.productCode;
         
         emit(event);
 
@@ -396,6 +401,7 @@ function UpdateAlertSent(alertSentData){
         var  alertSentId = alertSentData.alertSentId;
         var  assetObj = factory.newResource(NS,'AlertSent',alertSentId);
         assetObj.alertSentId = alertSentData.alertSentId;
+        assetObj.productCode = alertSentData.productCode;
         assetObj.alertId = alertSentData.alertId;
         assetObj.deviceAddressId = alertSentData.deviceAddressId;
         assetObj.deviceAddressType = alertSentData.deviceAddressType;
@@ -404,6 +410,7 @@ function UpdateAlertSent(alertSentData){
         // 3 Emit the event
         var event = factory.newEvent(NS, 'CreateAlertSentEvent');
         event.alertSentId = alertSentData.alertSentId;
+        event.productCode = alertSentData.productCode;
 
         
         emit(event);

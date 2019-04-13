@@ -18,14 +18,6 @@
 
 namespace org.smartfoodnetwork.scm
 
-participant Actors identified by participantId {
-  o String participantId
-  o String phoneNo
-  o String address
-  o String email  
-  o String participantType
-}
-
 participant FoodBusinessOperator identified by participantId{
   o String participantId
   o String phoneNo
@@ -109,6 +101,7 @@ asset Alert identified by alertId{
 asset AlertSent identified by alertSentId{
   o String alertSentId
   o String alertId
+  o String productCode  
   o String deviceAddressId 
   o String deviceAddressType default="FRIDGE"
   o String time
@@ -137,6 +130,7 @@ transaction CreateAlert{
 
 event CreateAlertEvent {
   o String alertId
+  o String productCode
 }
 
 transaction UpdateAlert{
@@ -151,6 +145,7 @@ transaction UpdateAlert{
 
 event UpdateAlertEvent {
   o String alertId
+  o String productCode
 }
 
 transaction CreateTrigger{
@@ -163,6 +158,7 @@ transaction CreateTrigger{
 
 event CreateTriggerEvent {
   o String triggerId
+  o String productCode
 }
 
 
@@ -178,6 +174,7 @@ transaction UpdateTrigger{
 
 event UpdateTriggerEvent {
   o String triggerId
+  o String productCode
 }
 
 transaction CreateAlertSent{
@@ -191,6 +188,7 @@ transaction CreateAlertSent{
 
 event CreateAlertSentEvent {
   o String alertSentId
+  o String productCode
 }
 
 transaction UpdateAlertSent{
@@ -204,4 +202,5 @@ transaction UpdateAlertSent{
 
 event UpdateAlertSentEvent {
   o String alertSentId
+  o String productCode
 }
