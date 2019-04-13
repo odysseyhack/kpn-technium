@@ -172,7 +172,7 @@ transaction UpdateTrigger{
   o String productCode
   o String recordedBy
   o String severity default="none"
-  o String status default="TO-ACCESS" //enum: {"TO-ACCESS","PROCESSED","IN_PROGRESS"}
+  o String status default="TO-ACCESS" //enum: {"TO-ACCESS","PROCESSED","IN-PROGRESS"}
 }
 
 

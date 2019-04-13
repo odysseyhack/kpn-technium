@@ -252,7 +252,7 @@ function CreateTrigger(triggerData){
         
         // 3 Emit the event
         var event = factory.newEvent(NS, 'CreateTriggerEvent');
-        event.alertId = triggerData.alertId;
+        event.triggerId = triggerData.triggerId;
 
         
         emit(event);
@@ -302,7 +302,7 @@ function UpdateTrigger(triggerData){
         
         // 3 Emit the event
         var event = factory.newEvent(NS, 'UpdateTriggerEvent');
-        event.alertId = triggerData.alertId;
+        event.triggerId = triggerData.triggerId;
 
         
         emit(event);

@@ -1,5 +1,8 @@
-BusinessNetworkLedger is setup using Hyperledger Fabric and Hyperledger Composer. Each participant would be able to access this business network using their card.
-**card**
+BusinessNetworkLedger is setup using Hyperledger Fabric and Hyperledger Composer. A participant would be able to access this business network using their own business network card.
+
+**Business Network Card**
+A Business Network Card provides all of the information needed to connect to a blockchain business network. It is only possible to access a blockchain Business Network through a valid Business Network Card.
+
 
 Three major components described in this folder (developed using Hyperledger Composer) are
 
