@@ -1,4 +1,4 @@
-This folder the extract of eggnet.bna file. BusinessNetworkLedger is setup using Hyperledger Fabric and Hyperledger Composer
+BusinessNetworkLedger is setup using Hyperledger Fabric and Hyperledger Composer
 
 Three major components described in this folder (developed using Hyperledger Composer) are
 
