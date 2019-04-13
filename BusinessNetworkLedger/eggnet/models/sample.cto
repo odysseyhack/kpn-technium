@@ -26,6 +26,20 @@ participant Actors identified by participantId {
   o String participantType
 }
 
+participant FoodBusinessOperator identified by participantId{
+  o String participantId
+  o String phoneNo
+  o String address
+  o String email  
+}
+
+participant CompetentAuthority identified by participantId{
+  o String participantId
+  o String phoneNo
+  o String address
+  o String email  
+}
+
 participant Fridge identified by participantId {
   o String participantId
   o String phoneNo
@@ -106,7 +120,7 @@ asset Trigger identified by triggerId{
   o String productCode
   o String recordedBy
   o String severity default="none"
-  o String status default="TO-ACCESS" //enum: {"TO-ACCESS","PROCESSED","IN_PROGRESS"}
+  o String status default="TO-ASSESS" //enum: {"TO-ASSESS","PROCESSED","IN_PROGRESS"}
 }
 
 

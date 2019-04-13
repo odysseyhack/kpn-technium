@@ -1,4 +1,5 @@
-BusinessNetworkLedger is setup using Hyperledger Fabric and Hyperledger Composer
+BusinessNetworkLedger is setup using Hyperledger Fabric and Hyperledger Composer. Each participant would be able to access this business network using their card.
+**card**
 
 Three major components described in this folder (developed using Hyperledger Composer) are
 
@@ -10,6 +11,7 @@ The transaction processor function file(.js) contains the JavaScript logic to ex
 
 3) **Permissions**:
 Access controls are applied on the assets defined in .cto file based in the participant type. Rules are written in .acl file
+
 
 4) **Queries**:
 Queries are defined in a query file (.qry) in the parent directory of the business network definition. Queries contain a 'WHERE' clause, which defines the criteria by which assets or participants are selected.
