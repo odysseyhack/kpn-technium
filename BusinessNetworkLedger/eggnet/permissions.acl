@@ -39,33 +39,14 @@ rule NetworkAdminSystem {
     resource: "org.hyperledger.composer.system.**"
     action: ALLOW
 }
-/*
-//  Needed for Creating the "CreateBatch" transaction
+
+//  Needed for Creating the "CreateProduct" transaction
 // Only a farmer can execute this transaction
-rule RolePermissionCreateBatch {
-  description: "only farmer can create a batch"
+rule RolePermissionCreateProduct {
+  description: "only farmer can create a product"
   participant: "org.smartfoodnetwork.scm.Farmer"
   operation: CREATE
   resource: "org.smartfoodnetwork.scm.*"
-  transaction: "org.smartfoodnetwork.scm.CreateBatch"
+  transaction: "org.smartfoodnetwork.scm.CreateProduct"
   action: ALLOW
 }
-
-rule RolePermissionCreatePurchaseOrder {
-  description: "only importer can create a purchase order"
-  participant: "org.smartfoodnetwork.scm.Importer"
-  operation: CREATE
-  resource: "org.smartfoodnetwork.scm.*"
-  transaction: "org.smartfoodnetwork.scm.CreatePurchaseOrder"
-  action: ALLOW
-}
-
-rule RolePermissionPlaceImportRequest {
-  description: "only importer can create an import request"
-  participant: "org.smartfoodnetwork.scm.Importer"
-  operation: CREATE
-  resource: "org.smartfoodnetwork.scm.*"
-  transaction: "org.smartfoodnetwork.scm.PlaceImportRequest"
-  action: ALLOW
-}
-*/
