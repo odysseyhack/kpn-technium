@@ -1,6 +1,6 @@
 This folder the extract of eggnet.bna file. BusinessNetworkLedger is setup using Hyperledger Fabric and Hyperledger Composer
 
-The three major components described in using Composer are -
+Three major components described in this folder (developed using Hyperledger Composer) are -
 
 1) Models
 The model file(.cto) contains the definitions of each class of asset, transaction, participant, and event. It implicitly extends the Hyperledger Composer System Model described in the modelling language documentation.
