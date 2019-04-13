@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context="com.nextinnovation.pt.barcodescanner.activity.WebViewActivity">
+
+    <WebView xmlns:android="http://schemas.android.com/apk/res/android"
+             android:id="@+id/google_webview"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"/>
+
+    <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical">
+
+        <TextView
+                android:id="@+id/detail_tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                tools:text="Name : Eggs"/>
+
+        <TextView
+                android:id="@+id/detail_tv_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                tools:text="Type : Jumbo"/>
+
+        <TextView
+                android:id="@+id/detail_tv_quality"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                tools:text="Quality : Organic"/>
+
+        <TextView
+                android:id="@+id/detail_tv_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                tools:text="Location : Rotterdam"/>
+
+        <TextView
+                android:id="@+id/detail_tv_remark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                tools:text="Remark : To be kept below 30c"/>
+
+        <TextView
+                android:id="@+id/detail_tv_quantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                tools:text="Quantity : 300"/>
+
+        <TextView
+                android:id="@+id/detail_tv_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                tools:text="Price : 3000"/>
+    </LinearLayout>
+
+    <Button
+            android:id="@+id/btnRetry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Retry"
+            android:visibility="invisible"/>
+
+
+    <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+                                       android:id="@+id/adView"
+                                       android:layout_width="wrap_content"
+                                       android:layout_height="wrap_content"
+                                       android:layout_alignParentBottom="true"
+                                       android:layout_centerHorizontal="true"
+                                       ads:adSize="BANNER"
+                                       ads:adUnitId="@string/ad_unit_id"></com.google.android.gms.ads.AdView>
+
+
+</RelativeLayout>
