@@ -1,5 +1,5 @@
 
-Smart food is defined by four core values and essentials components, which are: 
+**Smart food** is defined by four core values and essentials components, which are: 
 1) Safe
 2) Ethical
 3) Verifiable
