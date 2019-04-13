@@ -1,5 +1,35 @@
 package com.nextinnovation.pt.barcodescanner.activity;
 
+import android.content.Intent;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.StrictMode;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.View;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.nextinnovation.pt.barcodescanner.R;
+import com.nextinnovation.pt.barcodescanner.utils.Utils;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import android.graphics.Color;
+
+
 import android.Manifest;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -32,7 +62,6 @@ import com.nextinnovation.pt.barcodescanner.R;
 import com.nextinnovation.pt.barcodescanner.database.DatabaseHelper;
 import com.nextinnovation.pt.barcodescanner.fragment.BarcodeFragment;
 import com.nextinnovation.pt.barcodescanner.fragment.LicenseFragment;
-import com.nextinnovation.pt.barcodescanner.activity.WebViewActivity;
 import com.nextinnovation.pt.barcodescanner.fragment.ProductListFragment;
 import com.nextinnovation.pt.barcodescanner.model.Product;
 
@@ -43,49 +72,17 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import android.content.Intent;
-import android.os.Build;
-import android.os.Bundle;
-import android.os.StrictMode;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.View;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.nextinnovation.pt.barcodescanner.R;
-import com.nextinnovation.pt.barcodescanner.utils.Utils;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import android.graphics.Color;
-
 public class MainActivity extends AppCompatActivity implements BarcodeFragment.ScanRequest {
 
-    private Context context ;
+    private Context context;
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
     public static final String BARCODE_KEY = "BARCODE";
     private Barcode barcodeResult;
-    private final String TAG = MainActivity.class.getSimpleName() ;
+    private final String TAG = MainActivity.class.getSimpleName();
     private final int MY_PERMISSION_REQUEST_CAMERA = 1001;
-    private ItemScanned itemScanned ;
-
-
-
+    private ItemScanned itemScanned;
 
 
     @Override
@@ -117,19 +114,19 @@ public class MainActivity extends AppCompatActivity implements BarcodeFragment.S
     }
 
     public String getScanTime() {
-     DateFormat timeFormat = new SimpleDateFormat("hh:mm a" , Locale.getDefault());
-        return  timeFormat.format(new Date());
+        DateFormat timeFormat = new SimpleDateFormat("hh:mm a", Locale.getDefault());
+        return timeFormat.format(new Date());
     }
 
     public String getScanDate() {
-        DateFormat dateFormat = new SimpleDateFormat("dd-MMM-yy",Locale.getDefault());
+        DateFormat dateFormat = new SimpleDateFormat("dd-MMM-yy", Locale.getDefault());
         return dateFormat.format(new Date());
     }
 
     @Override
     public void scanBarcode() {
         /** This method will listen the button clicked passed form the fragment **/
-         checkPermission();
+        checkPermission();
     }
 
     class ViewPagerAdapter extends FragmentPagerAdapter {
@@ -162,31 +159,21 @@ public class MainActivity extends AppCompatActivity implements BarcodeFragment.S
             return mFragmentTitleList.get(position);
         }
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_menu,menu);
-        return true ;
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
         int id = item.getItemId();
-        switch (id){
-           /* case R.id.item_share:
-                openShare();
-                break;
-            case R.id.item_rate_app:
-                openRate();
-                break ;
-            case R.id.item_submit_bug:
-                openSubmitBug();
-                break ;*/
+        switch (id) {
             case R.id.item_notification:
-                notification();
-                break;
-            case R.id.item_license:
-                openLisence();
+                //notification();
+                startActivity(new Intent(MainActivity.this, WebViewActivity.class));
                 break;
         }
 
@@ -218,23 +205,26 @@ public class MainActivity extends AppCompatActivity implements BarcodeFragment.S
         }
     }
 
+    private void notification() {
+        Intent notificationIntent = new Intent(Intent.ACTION_SEND);
+        try {
+            startActivity(notificationIntent);
+            setContentView(R.layout.activity_web_view);
+            loadWebView("123");
+        } catch (ActivityNotFoundException e) {
+        }
+    }
+
     private void openShare() {
         Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
-        String appLink = "https://play.google.com/store/apps/details?id="+context.getPackageName();
+        String appLink = "https://play.google.com/store/apps/details?id=" + context.getPackageName();
         sharingIntent.setType("text/plain");
-        String shareBodyText = "Check Out The Cool Barcode Reader App \n Link: "+appLink +" \n" +
+        String shareBodyText = "Check Out The Cool Barcode Reader App \n Link: " + appLink + " \n" +
                 " #Barcode #Android";
-        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,"Barcode Reader Android App");
+        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Barcode Reader Android App");
         sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBodyText);
         startActivity(Intent.createChooser(sharingIntent, "Share"));
     }
-
-    private void notification() {
-        LicenseFragment licensesFragment = new LicenseFragment();
-        WebViewActivity webViewActivity = new WebViewActivity();
-        webViewActivity.
-    }
-
 
     private void openLisence() {
         LicenseFragment licensesFragment = new LicenseFragment();
@@ -249,7 +239,7 @@ public class MainActivity extends AppCompatActivity implements BarcodeFragment.S
         builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 DatabaseHelper databaseHelper = new DatabaseHelper(context);
-                databaseHelper.addProduct(new Product(scanContent,currentTime,currentDate));
+                databaseHelper.addProduct(new Product(scanContent, currentTime, currentDate));
                 Toast.makeText(MainActivity.this, "Saved", Toast.LENGTH_SHORT).show();
                 viewPager.setCurrentItem(1);
 
@@ -272,12 +262,12 @@ public class MainActivity extends AppCompatActivity implements BarcodeFragment.S
                 .setTitle(R.string.exit_title);
         builder.setPositiveButton(R.string.ok_title, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                  MainActivity.this.finish();
+                MainActivity.this.finish();
             }
         });
         builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                      dialog.dismiss();
+                dialog.dismiss();
             }
         });
 
@@ -286,7 +276,7 @@ public class MainActivity extends AppCompatActivity implements BarcodeFragment.S
 
     private void checkPermission() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
-            Log.d(TAG , getResources().getString(R.string.camera_permission_granted));
+            Log.d(TAG, getResources().getString(R.string.camera_permission_granted));
             startScanningBarcode();
         } else {
             requestCameraPermission();
@@ -297,10 +287,10 @@ public class MainActivity extends AppCompatActivity implements BarcodeFragment.S
     private void requestCameraPermission() {
         if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {
 
-                    ActivityCompat.requestPermissions(MainActivity.this,  new String[] {Manifest.permission.CAMERA}, MY_PERMISSION_REQUEST_CAMERA);
+            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.CAMERA}, MY_PERMISSION_REQUEST_CAMERA);
 
-        } else{
-            ActivityCompat.requestPermissions(MainActivity.this,new String[] {Manifest.permission.CAMERA}, MY_PERMISSION_REQUEST_CAMERA);
+        } else {
+            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.CAMERA}, MY_PERMISSION_REQUEST_CAMERA);
         }
     }
 
@@ -319,7 +309,7 @@ public class MainActivity extends AppCompatActivity implements BarcodeFragment.S
                     @Override
                     public void onResult(Barcode barcode) {
                         barcodeResult = barcode;
-                        showDialog(barcode.rawValue , getScanTime(),getScanDate());
+                        showDialog(barcode.rawValue, getScanTime(), getScanDate());
                     }
                 })
                 .build();
@@ -329,7 +319,7 @@ public class MainActivity extends AppCompatActivity implements BarcodeFragment.S
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode==MY_PERMISSION_REQUEST_CAMERA && grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+        if (requestCode == MY_PERMISSION_REQUEST_CAMERA && grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             startScanningBarcode();
         } else {
             Snackbar.make(findViewById(android.R.id.content), getResources().getString(R.string.sorry_for_not_permission), Snackbar.LENGTH_SHORT)
@@ -339,14 +329,14 @@ public class MainActivity extends AppCompatActivity implements BarcodeFragment.S
     }
 
 
-    public interface  ItemScanned{
+    public interface ItemScanned {
         void itemUpdated();
     }
 
     private void loadWebView(String barCode) {
         Log.d("WebViewActivity", barCode);
         if (Utils.isNetworkAvailable(this)) {
-            //btnRetry.setVisibility(View.INVISIBLE);
+            // btnRetry.setVisibility(View.INVISIBLE);
             WebView myWebView = findViewById(R.id.google_webview);
             myWebView.setWebViewClient(new WebViewClient());
             myWebView.getSettings().setJavaScriptEnabled(true);
@@ -417,9 +407,5 @@ public class MainActivity extends AppCompatActivity implements BarcodeFragment.S
             //btnRetry.setVisibility(View.VISIBLE);
             Toast.makeText(this, "No Internet Connection", Toast.LENGTH_SHORT).show();
         }
-
-
     }
-
-
 }

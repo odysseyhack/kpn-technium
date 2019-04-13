@@ -37,7 +37,8 @@ public class WebViewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web_view);
-        btnRetry = findViewById(R.id.btnRetry);
+        loadWebView("123");
+        /*btnRetry = findViewById(R.id.btnRetry);
         loadAdd();
 
         Intent intent = getIntent();
@@ -51,7 +52,7 @@ public class WebViewActivity extends AppCompatActivity {
             public void onClick(View v) {
                 loadWebView(barCode);
             }
-        });
+        });*/
 
     }
 
@@ -66,7 +67,7 @@ public class WebViewActivity extends AppCompatActivity {
     private void loadWebView(String barCode) {
         Log.d("WebViewActivity", barCode);
         if (Utils.isNetworkAvailable(this)) {
-            btnRetry.setVisibility(View.INVISIBLE);
+           // btnRetry.setVisibility(View.INVISIBLE);
             WebView myWebView = findViewById(R.id.google_webview);
             myWebView.setWebViewClient(new WebViewClient());
             myWebView.getSettings().setJavaScriptEnabled(true);
@@ -134,7 +135,7 @@ public class WebViewActivity extends AppCompatActivity {
             }
 
         } else {
-            btnRetry.setVisibility(View.VISIBLE);
+            //btnRetry.setVisibility(View.VISIBLE);
             Toast.makeText(this, "No Internet Connection", Toast.LENGTH_SHORT).show();
         }
 
