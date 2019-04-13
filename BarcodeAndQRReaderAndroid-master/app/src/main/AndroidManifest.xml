@@ -32,6 +32,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.nextinnovation.pt.barcodescanner.activity.MainActivity" />
         </activity>
+        <activity
+                android:name=".SecondScreenActivity" >
+        </activity>
         <!-- For Fabric Crash Analytics -->
         <meta-data
             android:name="io.fabric.ApiKey"
