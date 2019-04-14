@@ -38,21 +38,6 @@ public class WebViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web_view);
         loadWebView("123");
-        /*btnRetry = findViewById(R.id.btnRetry);
-        loadAdd();
-
-        Intent intent = getIntent();
-        if (intent.getExtras() != null) {
-            barCode = intent.getStringExtra("product_id");
-            loadWebView(barCode);
-        }
-
-        btnRetry.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loadWebView(barCode);
-            }
-        });*/
 
     }
 
@@ -75,9 +60,6 @@ public class WebViewActivity extends AppCompatActivity {
             if (Utils.isValidURL(barCode)) {
                 myWebView.loadUrl(barCode);
             } else {
-//                myWebView.loadUrl("http://smartfood.network:3000/api/queries/AllFarmProducts");
-                // myWebView.loadUrl("https://www.google.com/search?q="+barCode);
-                //myWebView.loadUrl("http://d846145b.ngrok.io/api/queries/AllImportRequests");
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
@@ -113,8 +95,6 @@ public class WebViewActivity extends AppCompatActivity {
                                     try {
                                         JSONArray jsonArray = new JSONArray(myJSONData);
                                         JSONObject jsonObject = jsonArray.getJSONObject(0);
-                                        //JSONObject jsonObject = new JSONObject(myJSONData);
-                                        //((TextView) findViewById(R.id.detail_tv_name)).setTextColor(Color.BLUE);
                                         ((TextView) findViewById(R.id.detail_tv_name)).setText("alertSentId : " + jsonObject.getString("alertSentId"));
                                         ((TextView) findViewById(R.id.detail_tv_type)).setText("alertId : " + jsonObject.getString("alertId"));
                                         ((TextView) findViewById(R.id.detail_tv_quality)).setText("productCode : " + jsonObject.getString("productCode"));
@@ -135,7 +115,7 @@ public class WebViewActivity extends AppCompatActivity {
             }
 
         } else {
-            //btnRetry.setVisibility(View.VISIBLE);
+
             Toast.makeText(this, "No Internet Connection", Toast.LENGTH_SHORT).show();
         }
 

@@ -76,18 +76,7 @@ def sms_leaf_nodes(graphs, fridgeOwners, node):
                         conn_obj.request('POST', '/communication/nexmo/sms/send', payload, headers)
                         resp = conn_obj.getresponse()
                         print(resp.read().decode())
-
-                        # #FridgeOwners = []
-                        
-                        # # TODO 
-                        
-                        
-                        # data = {}
-                        # data['phoneNumber'] = owner.phoneNumber
-                        # data['product'] = destination[1]
-                        # json_data = json.dumps(data)
-                        # print(json_data)
-
+                    
 
             sms_leaf_nodes(graphs, fridgeOwners, destination)
 
