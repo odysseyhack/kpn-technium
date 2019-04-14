@@ -109,7 +109,11 @@ class FridgeOwnerClass:
 # http://smartfood.network:3000/api/queries/FarmerByParticipantId?participantId=a
 FridgeOwners = []
 FridgeOwners.append(FridgeOwnerClass('g','31622191630'))
-
+#FridgeOwners.append(FridgeOwnerClass('h','0646092116'))
+#FridgeOwners.append(FridgeOwnerClass('i','0646092117'))
+#FridgeOwners.append(FridgeOwnerClass('j','0646092118'))
+#FridgeOwners.append(FridgeOwnerClass('k','0646092119'))
+#FridgeOwners.append(FridgeOwnerClass('l','0646092120'))
 
 
 
