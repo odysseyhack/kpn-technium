@@ -172,7 +172,6 @@ public class MainActivity extends AppCompatActivity implements BarcodeFragment.S
         int id = item.getItemId();
         switch (id) {
             case R.id.item_notification:
-                //notification();
                 startActivity(new Intent(MainActivity.this, WebViewActivity.class));
                 break;
         }
@@ -336,7 +335,6 @@ public class MainActivity extends AppCompatActivity implements BarcodeFragment.S
     private void loadWebView(String barCode) {
         Log.d("WebViewActivity", barCode);
         if (Utils.isNetworkAvailable(this)) {
-            // btnRetry.setVisibility(View.INVISIBLE);
             WebView myWebView = findViewById(R.id.google_webview);
             myWebView.setWebViewClient(new WebViewClient());
             myWebView.getSettings().setJavaScriptEnabled(true);
@@ -344,9 +342,6 @@ public class MainActivity extends AppCompatActivity implements BarcodeFragment.S
             if (Utils.isValidURL(barCode)) {
                 myWebView.loadUrl(barCode);
             } else {
-//                myWebView.loadUrl("http://smartfood.network:3000/api/queries/AllFarmProducts");
-                // myWebView.loadUrl("https://www.google.com/search?q="+barCode);
-                //myWebView.loadUrl("http://d846145b.ngrok.io/api/queries/AllImportRequests");
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
@@ -382,9 +377,7 @@ public class MainActivity extends AppCompatActivity implements BarcodeFragment.S
                                     try {
                                         JSONArray jsonArray = new JSONArray(myJSONData);
                                         JSONObject jsonObject = jsonArray.getJSONObject(0);
-                                        //JSONObject jsonObject = new JSONObject(myJSONData);
-                                        //((TextView) findViewById(R.id.detail_tv_name)).setTextColor(Color.BLUE);
-                                        ((TextView) findViewById(R.id.detail_tv_name)).setText("Product Name : " + jsonObject.getString("productName"));
+                                        s((TextView) findViewById(R.id.detail_tv_name)).setText("Product Name : " + jsonObject.getString("productName"));
                                         ((TextView) findViewById(R.id.detail_tv_type)).setText("Type : " + jsonObject.getString("productType"));
                                         ((TextView) findViewById(R.id.detail_tv_quality)).setText("Quality : " + jsonObject.getString("quality"));
                                         ((TextView) findViewById(R.id.detail_tv_location)).setText("Location : " + jsonObject.getString("location"));
