@@ -54,7 +54,8 @@ def sms_leaf_nodes(graphs, fridgeOwners, node):
                         print('SMS Alert to ' + owner.phoneNumber + ' : Product ' + destination[1] + ' is part of a contaminated supply chain')
 
 
-                        msg = 'Product ' + destination[1] + ' is part of a contaminated supply chain'
+                        #msg = 'Product ' + destination[1] + ' is part of a contaminated supply chain'
+                        msg = 'This pacakge has eggs contamination of Salmonella. Please dont consume. For further details contact the helpline number 06423432421'
                         url = 'api-prd.kpn.com'
                         conn_obj = http.client.HTTPSConnection(url)
 
@@ -69,7 +70,7 @@ def sms_leaf_nodes(graphs, fridgeOwners, node):
                         print(json_auth_resp["access_token"])
                         access_token = 'Bearer ' + json_auth_resp["access_token"] + ''
 
-                        payload = urllib.parse.urlencode({'to':owner.phoneNumber,'from':owner.phoneNumber,'text':'Product ' + destination[1] + ' is part of a contaminated supply chain'})
+                        payload = urllib.parse.urlencode({'to':owner.phoneNumber,'from':'182025550131','text':'This pacakge has eggs contamination of Salmonella. Please dont consume. For further details contact the helpline number 06423432421'})
                         headers = {"Content-Type" : 'application/x-www-form-urlencoded',"Authorization" : access_token}
                         json_payload = json.dumps(payload)
                         conn_obj.request('POST', '/communication/nexmo/sms/send', payload, headers)
@@ -109,7 +110,7 @@ class FridgeOwnerClass:
 # http://smartfood.network:3000/api/queries/FarmerByParticipantId?participantId=a
 FridgeOwners = []
 FridgeOwners.append(FridgeOwnerClass('g','31622191630'))
-#FridgeOwners.append(FridgeOwnerClass('h','0646092116'))
+FridgeOwners.append(FridgeOwnerClass('h','31620028461'))
 #FridgeOwners.append(FridgeOwnerClass('i','0646092117'))
 #FridgeOwners.append(FridgeOwnerClass('j','0646092118'))
 #FridgeOwners.append(FridgeOwnerClass('k','0646092119'))
