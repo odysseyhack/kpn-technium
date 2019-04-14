@@ -23,4 +23,6 @@ Queries are defined in a query file (.qry) in the parent directory of the busine
 **Testing your setup**
 
 You can login to your Hyperledger Composer playground(local setup).
-![alt text](http://url/to/img.png)
+![alt text](https://github.com/odysseyhack/kpn-technium/blob/master/BusinessNetworkLedger/images/business_netowork_composerPlayground.png)
+
+In order to issue a new ID you should goto 'ID Registry' dropdown in the top right corner. You will see any existing IDs and an option to Issue New ID. ![alt text](https://github.com/odysseyhack/kpn-technium/blob/master/BusinessNetworkLedger/images/ID_Registry.png)
