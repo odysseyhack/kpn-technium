@@ -18,12 +18,18 @@
 
 namespace org.smartfoodnetwork.scm
 
-participant Actors identified by participantId {
+participant FoodBusinessOperator identified by participantId{
   o String participantId
   o String phoneNo
   o String address
   o String email  
-  o String participantType
+}
+
+participant CompetentAuthority identified by participantId{
+  o String participantId
+  o String phoneNo
+  o String address
+  o String email  
 }
 
 participant Fridge identified by participantId {
@@ -88,49 +94,115 @@ asset Alert identified by alertId{
   o String productCode 
   o String alertDetails
   o String severity
-  o String assesedBy //participantId
+  o String assesedBy default="NONE" //participantId
   o String status default="ACTIVE" //enum: {"ACTIVE","INACTIVE"}
 }
 
 asset AlertSent identified by alertSentId{
   o String alertSentId
-  o Alert alert
+  o String alertId
+  o String productCode  
   o String deviceAddressId 
   o String deviceAddressType default="FRIDGE"
   o String time
 }
 
-//will be picked by Andre
+
 asset Trigger identified by triggerId{
   o String triggerId
   o String productCode
   o String recordedBy
   o String severity default="none"
-  o String status default="TO-ACCESS" //enum: {"TO-ACCESS","PROCESSED","IN_PROGRESS"}
+  o String status default="TO-ASSESS" //enum: {"TO-ASSESS","PROCESSED","IN_PROGRESS"}
 }
 
-//logic to be written
+
+
+transaction CreateAlert{
+  o String alertId
+  o String triggerId
+  o String productCode 
+  o String alertDetails
+  o String severity
+  o String assesedBy //participantId
+  o String status default="ACTIVE" //enum: {"ACTIVE","INACTIVE"}
+}
+
+event CreateAlertEvent {
+  o String alertId
+  o String productCode
+}
+
+transaction UpdateAlert{
+  o String alertId
+  o String triggerId
+  o String productCode 
+  o String alertDetails
+  o String severity
+  o String assesedBy //participantId
+  o String status default="ACTIVE" //enum: {"ACTIVE","INACTIVE"}
+}
+
+event UpdateAlertEvent {
+  o String alertId
+  o String productCode
+}
+
+transaction CreateTrigger{
+  o String triggerId
+  o String productCode
+  o String recordedBy
+  o String severity 
+  o String status 
+}
+
+event CreateTriggerEvent {
+  o String triggerId
+  o String productCode
+}
+
+
+
 transaction UpdateTrigger{
   o String triggerId
   o String productCode
   o String recordedBy
   o String severity default="none"
-  o String status default="TO-ACCESS" //enum: {"TO-ACCESS","PROCESSED","IN_PROGRESS"}
-}
-//logic to be written
-event UpdateTriggerEvent {
-  o String triggerId
+  o String status default="TO-ACCESS" //enum: {"TO-ACCESS","PROCESSED","IN-PROGRESS"}
 }
 
-//logic to be written
-transaction UpdateAlert{
+
+event UpdateTriggerEvent {
   o String triggerId
   o String productCode
-  o String recordedBy
-  o String severity default="none"
-  o String status default="TO-ACCESS" //enum: {"TO-ACCESS","PROCESSED","IN_PROGRESS"}
 }
-//logic to be written
-event UpdateAlertEvent {
-  o String triggerId
+
+transaction CreateAlertSent{
+  o String alertSentId
+  o String alertId
+  o String productCode
+  o String deviceAddressId 
+  o String deviceAddressType default="FRIDGE"
+  o String time
+}
+
+
+event CreateAlertSentEvent {
+  o String alertSentId
+  o String productCode
+}
+
+transaction UpdateAlertSent{
+  o String alertSentId
+  o String alertId
+  o String productCode
+  o String deviceAddressId 
+  o String deviceAddressType default="FRIDGE"
+  o String time
+}
+
+
+event UpdateAlertSentEvent {
+  o String alertSentId
+  o String productCode
 }

@@ -33,3 +33,19 @@
       SELECT  org.smartfoodnetwork.scm.Trigger
         WHERE (triggerId == _$triggerId)
  }
+
+ // Returns Alert by alertId 
+ query AlertsByAlertId {
+   description: "Returns alerts by alertId"
+   statement:  
+      SELECT  org.smartfoodnetwork.scm.Alert
+        WHERE (alertId == _$alertId)
+ }
+
+  // Returns AlertSent by alertSentId 
+ query AlertSentByAlertSentId {
+   description: "Returns AlertSent by alertSentId"
+   statement:  
+      SELECT  org.smartfoodnetwork.scm.AlertSent
+        WHERE (alertSentId == _$alertSentId)
+ }

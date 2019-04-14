@@ -1,4 +1,8 @@
-BusinessNetworkLedger is setup using Hyperledger Fabric and Hyperledger Composer
+BusinessNetworkLedger is setup using Hyperledger Fabric and Hyperledger Composer. A participant would be able to access this business network using their own business network card.
+
+**Business Network Card**
+A Business Network Card provides all of the information needed to connect to a blockchain business network. It is only possible to access a blockchain Business Network through a valid Business Network Card.
+
 
 Three major components described in this folder (developed using Hyperledger Composer) are
 
@@ -11,5 +15,14 @@ The transaction processor function file(.js) contains the JavaScript logic to ex
 3) **Permissions**:
 Access controls are applied on the assets defined in .cto file based in the participant type. Rules are written in .acl file
 
+
 4) **Queries**:
 Queries are defined in a query file (.qry) in the parent directory of the business network definition. Queries contain a 'WHERE' clause, which defines the criteria by which assets or participants are selected.
+
+
+**Testing your setup**
+
+You can login to your Hyperledger Composer playground(local setup).
+![alt text](https://github.com/odysseyhack/kpn-technium/blob/master/BusinessNetworkLedger/images/business_netowork_composerPlayground.png)
+
+In order to issue a new ID you should goto 'ID Registry' dropdown in the top right corner. You will see any existing IDs and an option to Issue New ID. ![alt text](https://github.com/odysseyhack/kpn-technium/blob/master/BusinessNetworkLedger/images/ID_Registry.png)
