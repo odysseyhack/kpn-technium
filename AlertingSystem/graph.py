@@ -57,17 +57,20 @@ def sms_leaf_nodes(graphs, fridgeOwners, node):
                         msg = 'Product ' + destination[1] + ' is part of a contaminated supply chain'
                         url = 'api-prd.kpn.com'
                         conn_obj = http.client.HTTPSConnection(url)
+
                         auth_payload = urllib.parse.urlencode({'client_id':'KukARHXs3nncHigG5MDnmHcx4QsyM3QK','client_secret':'OfEXFG4z7p6ZPQyS'})
                         headers = {"Content-Type" : 'application/x-www-form-urlencoded'}
                         conn_obj.request('POST', '/oauth/client_credential/accesstoken?grant_type=client_credentials', auth_payload, headers)
                         auth_resp={}
                         auth_resp = conn_obj.getresponse()
-                        print(auth_resp.read().decode())
-                        json_auth_resp = json.dumps(auth_resp.read().decode())
-                        print(json_auth_resp)
+                        dump_resp = auth_resp.read().decode()
+                        print(dump_resp)
+                        json_auth_resp = json.loads(dump_resp)
+                        print(json_auth_resp["access_token"])
+                        access_token = 'Bearer ' + json_auth_resp["access_token"] + ''
 
                         payload = urllib.parse.urlencode({'to':owner.phoneNumber,'from':owner.phoneNumber,'text':'Product ' + destination[1] + ' is part of a contaminated supply chain'})
-                        headers = {"Content-Type" : 'application/x-www-form-urlencoded',"Authorization" : "Bearer VuxGpfZ6Bp60JWNc2kPTKrM6APD4"}
+                        headers = {"Content-Type" : 'application/x-www-form-urlencoded',"Authorization" : access_token}
                         json_payload = json.dumps(payload)
                         conn_obj.request('POST', '/communication/nexmo/sms/send', payload, headers)
                         resp = conn_obj.getresponse()
