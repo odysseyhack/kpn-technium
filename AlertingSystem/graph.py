@@ -2,6 +2,8 @@
 from collections import defaultdict 
 import requests
 import json
+import urllib.request
+import http.client
 
 # function for adding edge to graph 
 graph = defaultdict(list) 
@@ -50,6 +52,30 @@ def sms_leaf_nodes(graphs, fridgeOwners, node):
                 for owner in FridgeOwners:
                     if(owner.name is destination[0]):
                         print('SMS Alert to ' + owner.phoneNumber + ' : Product ' + destination[1] + ' is part of a contaminated supply chain')
+
+
+                        msg = 'Product ' + destination[1] + ' is part of a contaminated supply chain'
+                        url = 'api-prd.kpn.com'
+                        conn_obj = http.client.HTTPSConnection(url)
+
+                        auth_payload = urllib.parse.urlencode({'client_id':'KukARHXs3nncHigG5MDnmHcx4QsyM3QK','client_secret':'OfEXFG4z7p6ZPQyS'})
+                        headers = {"Content-Type" : 'application/x-www-form-urlencoded'}
+                        conn_obj.request('POST', '/oauth/client_credential/accesstoken?grant_type=client_credentials', auth_payload, headers)
+                        auth_resp={}
+                        auth_resp = conn_obj.getresponse()
+                        dump_resp = auth_resp.read().decode()
+                        print(dump_resp)
+                        json_auth_resp = json.loads(dump_resp)
+                        print(json_auth_resp["access_token"])
+                        access_token = 'Bearer ' + json_auth_resp["access_token"] + ''
+
+                        payload = urllib.parse.urlencode({'to':owner.phoneNumber,'from':owner.phoneNumber,'text':'Product ' + destination[1] + ' is part of a contaminated supply chain'})
+                        headers = {"Content-Type" : 'application/x-www-form-urlencoded',"Authorization" : access_token}
+                        json_payload = json.dumps(payload)
+                        conn_obj.request('POST', '/communication/nexmo/sms/send', payload, headers)
+                        resp = conn_obj.getresponse()
+                        print(resp.read().decode())
+
                         # #FridgeOwners = []
                         
                         # # TODO 
@@ -82,13 +108,12 @@ class FridgeOwnerClass:
 
 # http://smartfood.network:3000/api/queries/FarmerByParticipantId?participantId=a
 FridgeOwners = []
-FridgeOwners.append(FridgeOwnerClass('g','0646092115'))
-FridgeOwners.append(FridgeOwnerClass('h','0646092116'))
-FridgeOwners.append(FridgeOwnerClass('i','0646092117'))
-FridgeOwners.append(FridgeOwnerClass('j','0646092118'))
-FridgeOwners.append(FridgeOwnerClass('k','0646092119'))
-FridgeOwners.append(FridgeOwnerClass('l','0646092120'))
-
+FridgeOwners.append(FridgeOwnerClass('g','31622191630'))
+#FridgeOwners.append(FridgeOwnerClass('h','0646092116'))
+#FridgeOwners.append(FridgeOwnerClass('i','0646092117'))
+#FridgeOwners.append(FridgeOwnerClass('j','0646092118'))
+#FridgeOwners.append(FridgeOwnerClass('k','0646092119'))
+#FridgeOwners.append(FridgeOwnerClass('l','0646092120'))
 
 
 
