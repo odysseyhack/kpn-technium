@@ -83,7 +83,7 @@ public class WebViewActivity extends AppCompatActivity {
                     public void run() {
                         try {
                             // Your implementation
-                            URL mUrl = new URL("http://smartfood.network:3000/api/queries/AllFarmProducts");
+                            URL mUrl = new URL("http://smartfood.network:3000/api/org.smartfoodnetwork.scm.AlertSent");
                             HttpURLConnection httpConnection = (HttpURLConnection) mUrl.openConnection();
                             httpConnection.setRequestMethod("GET");
                             httpConnection.setRequestProperty("Content-length", "0");
@@ -115,13 +115,13 @@ public class WebViewActivity extends AppCompatActivity {
                                         JSONObject jsonObject = jsonArray.getJSONObject(0);
                                         //JSONObject jsonObject = new JSONObject(myJSONData);
                                         //((TextView) findViewById(R.id.detail_tv_name)).setTextColor(Color.BLUE);
-                                        ((TextView) findViewById(R.id.detail_tv_name)).setText("Product Name : " + jsonObject.getString("productName"));
-                                        ((TextView) findViewById(R.id.detail_tv_type)).setText("Type : " + jsonObject.getString("productType"));
-                                        ((TextView) findViewById(R.id.detail_tv_quality)).setText("Quality : " + jsonObject.getString("quality"));
-                                        ((TextView) findViewById(R.id.detail_tv_location)).setText("Location : " + jsonObject.getString("location"));
-                                        ((TextView) findViewById(R.id.detail_tv_remark)).setText("Remarks : " + jsonObject.getString("remarks"));
-                                        ((TextView) findViewById(R.id.detail_tv_price)).setText("Price : " + jsonObject.getString("price"));
-                                        ((TextView) findViewById(R.id.detail_tv_quantity)).setText("Quantity : " + jsonObject.getString("quantity"));
+                                        ((TextView) findViewById(R.id.detail_tv_name)).setText("alertSentId : " + jsonObject.getString("alertSentId"));
+                                        ((TextView) findViewById(R.id.detail_tv_type)).setText("alertId : " + jsonObject.getString("alertId"));
+                                        ((TextView) findViewById(R.id.detail_tv_quality)).setText("productCode : " + jsonObject.getString("productCode"));
+                                        ((TextView) findViewById(R.id.detail_tv_location)).setText("deviceAddressId : " + jsonObject.getString("deviceAddressId"));
+                                        ((TextView) findViewById(R.id.detail_tv_remark)).setText("deviceAddressType : " + jsonObject.getString("deviceAddressType"));
+                                        ((TextView) findViewById(R.id.detail_tv_price)).setText("alertDetails : " + "This package has eggs contamination of Salmonella");
+                                        ((TextView) findViewById(R.id.detail_tv_quantity)).setText("time : " + jsonObject.getString("time"));
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                     }
