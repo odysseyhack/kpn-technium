@@ -195,6 +195,7 @@ event CreateAlertSentEvent {
 transaction UpdateAlertSent{
   o String alertSentId
   o String alertId
+  o String productCode
   o String deviceAddressId 
   o String deviceAddressType default="FRIDGE"
   o String time
